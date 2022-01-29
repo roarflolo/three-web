@@ -1,18 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-    <style>
-      body {
-        margin: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comforter&family=Supermercado+One&display=swap" rel="stylesheet">
+
+  <title>ThreeJS Tutorial</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Supermercado One';
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .center-screen {
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .font-comforter {
+      font-family: 'Comforter', cursive;
+    }
+
+    .font-super {
+      font-family: 'Supermercado One';
+    }
+  </style>
+</head>
+
+<body>
+  <div id="app">
+    <div class="center-screen absolute text-white text-center">
+      <h1 class="text-5xl drop-shadow">Roar Flolo</h1>
+      <p class="font-comforter text-3xl">No matter where you go, there you are</p>
+      <button class="border px-4 py-2 rounded-lg text-lg uppercase mt-6 hover:bg-white hover:text-black">Do It!</button>
+    </div>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>
