@@ -1,6 +1,4 @@
 Init
 ====
-* npm install
-
-
+* https://tailwindcss.com/docs/guides/vite
 * npm run dev

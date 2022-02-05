@@ -1,11 +1,13 @@
-// Find the latest version by visiting https://cdn.skypack.dev/three.
-//import * as THREE from 'https://cdn.skypack.dev/three@0.137.0';
 import * as THREE from 'three';
+
 import {
   OrbitControls
 } from 'three/examples/jsm/controls/OrbitControls.js';
+
 import * as dat from "dat.gui";
+
 import gsap from "gsap";
+
 
 (function () {
   var script = document.createElement('script');
@@ -115,14 +117,12 @@ function hoverIntersect(intersect) {
 
 requestAnimationFrame(animate);
 
-let previousTimestamp = 0;
 let animationTime = 0.0;
+const clock = new THREE.Clock();
 
 function animate(timestamp) {
-  if (previousTimestamp === 0) previousTimestamp = timestamp;
-  let deltaTime = (timestamp - previousTimestamp) / 1000.0;
+  let deltaTime = clock.getDelta();
   animationTime += deltaTime;
-  previousTimestamp = timestamp;
 
   animatePlane(planeMesh, animationTime);
 
