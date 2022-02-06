@@ -8,6 +8,9 @@ import * as dat from "dat.gui";
 
 import gsap from "gsap";
 
+import {
+  generators
+} from "/src/generators.js";
 
 (function () {
   var script = document.createElement('script');
@@ -60,7 +63,7 @@ document.body.appendChild(renderer.domElement);
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
-const planeGeom = new THREE.PlaneGeometry(10, 10, 20, 20);
+const planeGeom = generators.createGeom(generators.plane(10, 10, 20, 20));
 const planeMat = new THREE.MeshPhongMaterial({
   //color:0x3388ff,
   side: THREE.DoubleSide,
@@ -72,14 +75,15 @@ scene.add(planeMesh);
 createPlane();
 
 const light = new THREE.DirectionalLight(0xffffff, 1.0);
-light.position.set(0, 0, 1);
+light.position.set(0, 1, 1);
 scene.add(light);
 
 const light2 = new THREE.DirectionalLight(0x444444, 1.0);
-light2.position.set(0, 0, -1);
+light2.position.set(0, 1, -1);
 scene.add(light2);
 
 camera.position.z = 5;
+camera.position.y = 2;
 
 const mouse = {
   x: -1,
@@ -184,7 +188,11 @@ function generatePlane(meshObj) {
 function createPlane() {
   if (planeMesh != null && planeMesh != undefined) {
     planeMesh.geometry.dispose();
-    planeMesh.geometry = new THREE.PlaneGeometry(world.plane.width, world.plane.height, world.plane.segments, world.plane.segments);
+
+    const genData = generators.plane(world.plane.width, world.plane.height, world.plane.segments, world.plane.segments);
+    planeMesh.geometry = generators.createGeom(genData);
+    generators.apply(genData, planeMesh.geometry);
+
     generateInitialVtxArray(planeMesh);
     generatePlane(planeMesh);
   }
