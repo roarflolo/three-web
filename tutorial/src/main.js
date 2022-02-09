@@ -27,6 +27,11 @@ import {
 }
 from '/src/animatingPlane.js';
 
+import {
+  FloatingBubbles
+}
+from '/src/floatingBubbles.js';
+
 (function () {
   var script = document.createElement('script');
   script.onload = function () {
@@ -45,7 +50,9 @@ from '/src/animatingPlane.js';
 
 const scene = new THREE.Scene();
 const camera = new THREE.PerspectiveCamera(75.0, innerWidth / innerHeight, 0.1, 5000.0);
-const renderer = new THREE.WebGLRenderer();
+const renderer = new THREE.WebGLRenderer({
+  antialias: true
+});
 
 scene.background = new THREE.Color(0x104070);
 
@@ -56,17 +63,8 @@ document.body.appendChild(renderer.domElement);
 const controls = new OrbitControls(camera, renderer.domElement);
 
 
-
-
 const loader = new FontLoader();
 loader.load('fonts/helvetiker_regular.typeface.json', function (font) {
-  const color = 0x006699;
-
-  const matDark = new THREE.LineBasicMaterial({
-    color: 0xffffff,
-    side: THREE.DoubleSide
-  });
-
   const matLite = new THREE.MeshBasicMaterial({
     color: 0xffffff,
     transparent: false,
@@ -88,16 +86,17 @@ loader.load('fonts/helvetiker_regular.typeface.json', function (font) {
   scene.add(text);
 });
 
-
 camera.position.z = 5;
-camera.position.y = 2;
+//camera.position.y = 2;
 
+const floatingBubbles = new FloatingBubbles(scene);
 //const animatingPlane = new AnimatingPlane(scene, 10, 10, 20);
 const clock = new THREE.Clock();
 
 function animate(timestamp) {
   let deltaTime = clock.getDelta();
 
+  floatingBubbles.update(camera, deltaTime);
   //animatingPlane.update(camera, deltaTime);
 
   renderer.render(scene, camera);
